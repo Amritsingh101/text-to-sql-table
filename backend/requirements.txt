@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+rank-bm25
+faiss-cpu
+numpy
+sentence-transformers
+networkx

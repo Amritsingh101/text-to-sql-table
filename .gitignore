@@ -1,0 +1,30 @@
+# Data directories and model artifacts
+data/
+backend/data/
+*.pkl
+*.npy
+*.faiss
+*.safetensors
+*.bin
+
+# Python cache and environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+ENV/
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+*.log

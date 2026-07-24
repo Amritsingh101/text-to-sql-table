@@ -1,0 +1,2393 @@
+[
+    {
+        "table": "customer",
+        "category": "User Management",
+        "summary": "Stores registered user profiles, contact details, and account status.",
+        "core_concepts": [
+            "registered user profile",
+            "shopper account",
+            "buyer contact details",
+            "customer identity",
+            "platform user",
+            "membership status"
+        ],
+        "aliases": [
+            "user",
+            "buyer",
+            "shopper",
+            "client",
+            "account holder",
+            "member"
+        ],
+        "query_examples": [
+            "find registered users with active accounts",
+            "show customer email and phone number",
+            "look up buyer profile by email",
+            "when did the shopper register their account",
+            "list of all active platform members",
+            "get contact details for a specific client",
+            "who is the account holder for this email",
+            "search users by phone number",
+            "check membership status of a shopper",
+            "find profile details of new buyers"
+        ],
+        "business_keywords": [
+            "user",
+            "profile",
+            "account",
+            "contact",
+            "email",
+            "phone",
+            "shopper",
+            "member"
+        ],
+        "business_concepts": [
+            "Customer",
+            "Identity",
+            "Account Management",
+            "User Profile"
+        ],
+        "columns": [
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "Unique internal identifier for the registered user",
+                "aliases": [
+                    "user id",
+                    "buyer id",
+                    "account id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "cust_code",
+                "type": "VARCHAR",
+                "description": "Public or external reference code for the client",
+                "aliases": [
+                    "client code",
+                    "user code"
+                ],
+                "importance": 3
+            },
+            {
+                "name": "full_name",
+                "type": "VARCHAR",
+                "description": "Complete legal or display name of the shopper",
+                "aliases": [
+                    "name",
+                    "buyer name",
+                    "user name"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "email",
+                "type": "VARCHAR",
+                "description": "Primary email address used for login and contact",
+                "aliases": [
+                    "email address",
+                    "contact email"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "phone",
+                "type": "VARCHAR",
+                "description": "Primary mobile or landline number for the user",
+                "aliases": [
+                    "phone number",
+                    "mobile",
+                    "contact number"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "status",
+                "type": "VARCHAR",
+                "description": "Current state of the account like active, suspended, or closed",
+                "aliases": [
+                    "account status",
+                    "user state",
+                    "is active"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "created_at",
+                "type": "TIMESTAMP",
+                "description": "Date and time when the user registered on the platform",
+                "aliases": [
+                    "registration date",
+                    "join date",
+                    "sign up date"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "customer_id"
+        ],
+        "foreign_keys": [],
+        "connected_tables": [
+            "cust_addr",
+            "tbl_ord_hdr",
+            "review",
+            "cart_item",
+            "wishlist_item",
+            "recently_viewed",
+            "recommendation_log"
+        ],
+        "importance": 10
+    },
+    {
+        "table": "cust_addr",
+        "category": "Customer Data",
+        "summary": "Stores shipping destinations and billing locations for customer orders.",
+        "core_concepts": [
+            "shipping destination",
+            "billing location",
+            "delivery address",
+            "customer residence",
+            "package drop-off point",
+            "user saved locations"
+        ],
+        "aliases": [
+            "user address",
+            "delivery location",
+            "shipping details",
+            "billing details"
+        ],
+        "query_examples": [
+            "customer shipping address",
+            "where should the package be delivered",
+            "buyer's billing location",
+            "find default delivery destination for user",
+            "address of customer",
+            "what city does the shopper live in",
+            "get postal code for user address",
+            "customer residence state",
+            "list all saved shipping details for buyer",
+            "check if location is default for billing"
+        ],
+        "business_keywords": [
+            "shipping",
+            "billing",
+            "address",
+            "destination",
+            "location",
+            "residence",
+            "city",
+            "postal"
+        ],
+        "business_concepts": [
+            "Address",
+            "Logistics",
+            "Customer Location",
+            "Fulfillment"
+        ],
+        "columns": [
+            {
+                "name": "addr_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the location record",
+                "aliases": [
+                    "address id",
+                    "location id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "Identifier of the user who owns this address",
+                "aliases": [
+                    "user id",
+                    "buyer id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "addr_type",
+                "type": "VARCHAR",
+                "description": "Specifies if location is for shipping, billing, or both",
+                "aliases": [
+                    "address type",
+                    "location type"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "line1",
+                "type": "VARCHAR",
+                "description": "Primary street address or apartment number",
+                "aliases": [
+                    "street address",
+                    "address line 1"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "city",
+                "type": "VARCHAR",
+                "description": "City or municipality of the residence",
+                "aliases": [
+                    "town",
+                    "municipality"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "state",
+                "type": "VARCHAR",
+                "description": "State, province, or region of the location",
+                "aliases": [
+                    "province",
+                    "region"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "postal_cd",
+                "type": "VARCHAR",
+                "description": "Zip code or postal routing number",
+                "aliases": [
+                    "zip code",
+                    "pin code",
+                    "postal code"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "is_default",
+                "type": "BOOLEAN",
+                "description": "Indicates if this is the primary location for the user",
+                "aliases": [
+                    "default address",
+                    "primary location"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "addr_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "customer_id",
+                "references_table": "customer",
+                "references_column": "customer_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "customer",
+            "tbl_ord_hdr"
+        ],
+        "importance": 8
+    },
+    {
+        "table": "seller_mst",
+        "category": "Vendor Management",
+        "summary": "Maintains profiles and performance ratings for marketplace vendors supplying products.",
+        "core_concepts": [
+            "marketplace vendor",
+            "third-party seller",
+            "supplier profile",
+            "merchant account",
+            "seller rating"
+        ],
+        "aliases": [
+            "vendor",
+            "merchant",
+            "supplier",
+            "partner",
+            "brand owner"
+        ],
+        "query_examples": [
+            "list all active marketplace vendors",
+            "find merchant contact email",
+            "get top rated suppliers",
+            "search for a specific third-party seller",
+            "check if vendor account is currently active",
+            "find supplier rating and reviews",
+            "who is the merchant for this brand",
+            "partner contact information",
+            "show inactive seller profiles",
+            "supplier performance rating"
+        ],
+        "business_keywords": [
+            "vendor",
+            "merchant",
+            "supplier",
+            "seller",
+            "partner",
+            "rating"
+        ],
+        "business_concepts": [
+            "Vendor",
+            "Merchant",
+            "B2B Partnership",
+            "Supplier Management"
+        ],
+        "columns": [
+            {
+                "name": "seller_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the marketplace vendor",
+                "aliases": [
+                    "vendor id",
+                    "merchant id",
+                    "supplier id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "seller_nm",
+                "type": "VARCHAR",
+                "description": "Registered business name or display name of the merchant",
+                "aliases": [
+                    "vendor name",
+                    "company name",
+                    "store name"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "email",
+                "type": "VARCHAR",
+                "description": "Official contact email address for the supplier",
+                "aliases": [
+                    "vendor email",
+                    "support email"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "rating",
+                "type": "DECIMAL",
+                "description": "Aggregated performance and feedback score for the vendor",
+                "aliases": [
+                    "seller score",
+                    "merchant rating"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "is_active",
+                "type": "BOOLEAN",
+                "description": "Flag showing if the merchant is allowed to sell currently",
+                "aliases": [
+                    "active vendor",
+                    "account status"
+                ],
+                "importance": 5
+            }
+        ],
+        "primary_keys": [
+            "seller_id"
+        ],
+        "foreign_keys": [],
+        "connected_tables": [
+            "product"
+        ],
+        "importance": 7
+    },
+    {
+        "table": "category",
+        "category": "Product Catalog",
+        "summary": "Defines the hierarchical taxonomy and classification structure for items sold.",
+        "core_concepts": [
+            "product taxonomy",
+            "catalog classification",
+            "item grouping",
+            "department hierarchy",
+            "merchandise type"
+        ],
+        "aliases": [
+            "department",
+            "product group",
+            "item class",
+            "taxonomy",
+            "catalog section"
+        ],
+        "query_examples": [
+            "list all main product departments",
+            "find subcategories for electronics",
+            "show hierarchy of clothing merchandise",
+            "what is the parent classification for smartphones",
+            "get taxonomy tree for catalog",
+            "search departments by name",
+            "find all item groups under home goods",
+            "catalog section for shoes",
+            "product classification structure",
+            "show top level merchandise categories"
+        ],
+        "business_keywords": [
+            "department",
+            "taxonomy",
+            "hierarchy",
+            "group",
+            "classification",
+            "catalog"
+        ],
+        "business_concepts": [
+            "Taxonomy",
+            "Catalog Management",
+            "Merchandising"
+        ],
+        "columns": [
+            {
+                "name": "category_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the merchandise department or group",
+                "aliases": [
+                    "department id",
+                    "group id",
+                    "class id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "category_name",
+                "type": "VARCHAR",
+                "description": "Display name of the catalog classification (e.g., Electronics)",
+                "aliases": [
+                    "department name",
+                    "group name"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "parent_category_id",
+                "type": "INTEGER",
+                "description": "Identifier of the broader department this subcategory belongs to",
+                "aliases": [
+                    "parent department",
+                    "super category"
+                ],
+                "importance": 4
+            }
+        ],
+        "primary_keys": [
+            "category_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "parent_category_id",
+                "references_table": "category",
+                "references_column": "category_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "category",
+            "product"
+        ],
+        "importance": 6
+    },
+    {
+        "table": "product",
+        "category": "Product Catalog",
+        "summary": "Master directory of all merchandise available for purchase across the platform.",
+        "core_concepts": [
+            "merchandise master",
+            "catalog item",
+            "sellable goods",
+            "brand offerings",
+            "platform assortment"
+        ],
+        "aliases": [
+            "item",
+            "goods",
+            "merchandise",
+            "article",
+            "sku master"
+        ],
+        "query_examples": [
+            "search for a specific brand of shoes",
+            "list all active merchandise in catalog",
+            "find item by SKU code",
+            "what department does this good belong to",
+            "who is the vendor selling this article",
+            "get product name and brand",
+            "show inactive items not currently sold",
+            "find all merchandise from a specific supplier",
+            "lookup catalog item details",
+            "display sellable goods by category"
+        ],
+        "business_keywords": [
+            "item",
+            "merchandise",
+            "sku",
+            "brand",
+            "goods",
+            "catalog"
+        ],
+        "business_concepts": [
+            "Product",
+            "Catalog",
+            "Merchandising",
+            "Assortment"
+        ],
+        "columns": [
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "Unique system identifier for the catalog item",
+                "aliases": [
+                    "item id",
+                    "goods id",
+                    "article id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "category_id",
+                "type": "INTEGER",
+                "description": "Department or classification the merchandise belongs to",
+                "aliases": [
+                    "department id",
+                    "group id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "seller_id",
+                "type": "INTEGER",
+                "description": "Vendor or merchant supplying this particular good",
+                "aliases": [
+                    "vendor id",
+                    "supplier id",
+                    "merchant id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "sku",
+                "type": "VARCHAR",
+                "description": "Stock keeping unit barcode or reference code for the item",
+                "aliases": [
+                    "barcode",
+                    "item code",
+                    "product code"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "product_name",
+                "type": "VARCHAR",
+                "description": "Display title or name of the merchandise",
+                "aliases": [
+                    "item name",
+                    "title",
+                    "goods name"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "brand",
+                "type": "VARCHAR",
+                "description": "Manufacturer or brand name of the article",
+                "aliases": [
+                    "make",
+                    "manufacturer",
+                    "label"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "is_active",
+                "type": "BOOLEAN",
+                "description": "Indicates if the item is currently listed for sale on platform",
+                "aliases": [
+                    "listed",
+                    "available",
+                    "sellable"
+                ],
+                "importance": 4
+            }
+        ],
+        "primary_keys": [
+            "product_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "category_id",
+                "references_table": "category",
+                "references_column": "category_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "seller_id",
+                "references_table": "seller_mst",
+                "references_column": "seller_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "category",
+            "seller_mst",
+            "inv_stock",
+            "tbl_ord_item",
+            "review",
+            "cart_item",
+            "wishlist_item",
+            "recently_viewed",
+            "recommendation_log"
+        ],
+        "importance": 10
+    },
+    {
+        "table": "inv_stock",
+        "category": "Inventory Management",
+        "summary": "Tracks real-time merchandise quantities and stock availability across physical warehouses.",
+        "core_concepts": [
+            "available inventory",
+            "warehouse stock levels",
+            "reserved quantities",
+            "merchandise availability",
+            "stock on hand"
+        ],
+        "aliases": [
+            "stock",
+            "inventory",
+            "availability",
+            "on hand",
+            "stock ledger"
+        ],
+        "query_examples": [
+            "check inventory in warehouse",
+            "how many items are available for sale",
+            "find reserved stock quantities",
+            "is this merchandise out of stock",
+            "get current stock on hand across locations",
+            "when was inventory last updated",
+            "how much stock is reserved for pending orders",
+            "check item availability by warehouse",
+            "total quantity available for product",
+            "warehouse stock levels for SKU"
+        ],
+        "business_keywords": [
+            "inventory",
+            "stock",
+            "availability",
+            "quantity",
+            "reserved",
+            "on_hand",
+            "warehouse"
+        ],
+        "business_concepts": [
+            "Inventory",
+            "Supply Chain",
+            "Fulfillment Readiness"
+        ],
+        "columns": [
+            {
+                "name": "stock_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the stock record at a specific location",
+                "aliases": [
+                    "inventory id",
+                    "record id"
+                ],
+                "importance": 3
+            },
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "The merchandise item being tracked for availability",
+                "aliases": [
+                    "item id",
+                    "sku id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "warehouse_id",
+                "type": "INTEGER",
+                "description": "The physical facility holding the inventory",
+                "aliases": [
+                    "location id",
+                    "facility id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "qty_available",
+                "type": "INTEGER",
+                "description": "Number of units physically ready to be sold and shipped",
+                "aliases": [
+                    "available stock",
+                    "on hand",
+                    "free stock"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "reserved_qty",
+                "type": "INTEGER",
+                "description": "Units allocated to customer orders but not yet shipped",
+                "aliases": [
+                    "allocated stock",
+                    "locked quantity",
+                    "pending units"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "last_upd",
+                "type": "TIMESTAMP",
+                "description": "Timestamp when stock quantities were most recently modified",
+                "aliases": [
+                    "updated at",
+                    "last sync"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "stock_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "product_id",
+                "references_table": "product",
+                "references_column": "product_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "warehouse_id",
+                "references_table": "warehouse",
+                "references_column": "warehouse_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "product",
+            "warehouse"
+        ],
+        "importance": 9
+    },
+    {
+        "table": "warehouse",
+        "category": "Logistics & Supply Chain",
+        "summary": "Maintains details of physical fulfillment centers where inventory is stored.",
+        "core_concepts": [
+            "fulfillment center",
+            "storage facility",
+            "distribution hub",
+            "inventory location",
+            "shipping origin"
+        ],
+        "aliases": [
+            "distribution center",
+            "facility",
+            "depot",
+            "hub",
+            "fulfillment location"
+        ],
+        "query_examples": [
+            "list all fulfillment centers",
+            "find location of warehouse",
+            "which city is the distribution center in",
+            "get warehouse names and states",
+            "show storage facilities in New York",
+            "find distribution hub details",
+            "inventory location lookup",
+            "where are items shipped from",
+            "list of platform depots",
+            "identify fulfillment locations"
+        ],
+        "business_keywords": [
+            "warehouse",
+            "facility",
+            "hub",
+            "distribution",
+            "center",
+            "storage"
+        ],
+        "business_concepts": [
+            "Logistics",
+            "Supply Chain",
+            "Fulfillment Operations",
+            "Infrastructure"
+        ],
+        "columns": [
+            {
+                "name": "warehouse_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the distribution facility",
+                "aliases": [
+                    "facility id",
+                    "hub id",
+                    "depot id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "warehouse_name",
+                "type": "VARCHAR",
+                "description": "Designated name or code of the fulfillment center",
+                "aliases": [
+                    "facility name",
+                    "hub name",
+                    "center name"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "city",
+                "type": "VARCHAR",
+                "description": "Municipality where the storage facility is located",
+                "aliases": [
+                    "warehouse city",
+                    "facility location"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "state",
+                "type": "VARCHAR",
+                "description": "Region or province of the distribution center",
+                "aliases": [
+                    "warehouse state",
+                    "region"
+                ],
+                "importance": 4
+            }
+        ],
+        "primary_keys": [
+            "warehouse_id"
+        ],
+        "foreign_keys": [],
+        "connected_tables": [
+            "inv_stock",
+            "ship_hdr"
+        ],
+        "importance": 6
+    },
+    {
+        "table": "tbl_ord_hdr",
+        "category": "Order Management",
+        "summary": "Core record of customer purchases, aggregating totals, dates, and destination details.",
+        "core_concepts": [
+            "customer purchase",
+            "sales receipt",
+            "checkout transaction",
+            "order summary",
+            "purchase header",
+            "order status"
+        ],
+        "aliases": [
+            "order",
+            "purchase",
+            "sales order",
+            "transaction header",
+            "booking"
+        ],
+        "query_examples": [
+            "find recent customer purchases",
+            "show order status for a specific buyer",
+            "total amount spent on a transaction",
+            "find customers who applied coupons",
+            "when was this sales order placed",
+            "list pending checkouts",
+            "get shipping destination for a purchase",
+            "look up purchase by order ID",
+            "show orders exceeding a total amount",
+            "check sales receipt details"
+        ],
+        "business_keywords": [
+            "order",
+            "purchase",
+            "sales",
+            "status",
+            "total",
+            "coupon",
+            "checkout"
+        ],
+        "business_concepts": [
+            "Sales",
+            "Order Processing",
+            "Revenue",
+            "Customer Transaction"
+        ],
+        "columns": [
+            {
+                "name": "ord_id",
+                "type": "INTEGER",
+                "description": "Unique primary identifier for the sales order",
+                "aliases": [
+                    "order number",
+                    "purchase id",
+                    "receipt id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "The buyer who completed the checkout",
+                "aliases": [
+                    "buyer id",
+                    "shopper id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "order_date",
+                "type": "TIMESTAMP",
+                "description": "Timestamp when the purchase was finalized",
+                "aliases": [
+                    "purchase date",
+                    "checkout time",
+                    "booking date"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "sts_cd",
+                "type": "VARCHAR",
+                "description": "Current lifecycle state of the purchase (e.g., pending, shipped, delivered)",
+                "aliases": [
+                    "order status",
+                    "state",
+                    "progress"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "coupon_id",
+                "type": "INTEGER",
+                "description": "Promotional code or discount voucher applied during checkout",
+                "aliases": [
+                    "promo id",
+                    "voucher code",
+                    "discount applied"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "ship_addr_id",
+                "type": "INTEGER",
+                "description": "The destination address selected for delivery",
+                "aliases": [
+                    "delivery address",
+                    "shipping location"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "total_amount",
+                "type": "DECIMAL",
+                "description": "Final gross value of the purchase including items, taxes, and shipping",
+                "aliases": [
+                    "order total",
+                    "gross amount",
+                    "total cost"
+                ],
+                "importance": 5
+            }
+        ],
+        "primary_keys": [
+            "ord_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "customer_id",
+                "references_table": "customer",
+                "references_column": "customer_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "coupon_id",
+                "references_table": "coupon",
+                "references_column": "coupon_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "ship_addr_id",
+                "references_table": "cust_addr",
+                "references_column": "addr_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "customer",
+            "coupon",
+            "cust_addr",
+            "tbl_ord_item",
+            "pay_trn",
+            "ship_hdr"
+        ],
+        "importance": 10
+    },
+    {
+        "table": "tbl_ord_item",
+        "category": "Order Management",
+        "summary": "Individual merchandise items purchased within a specific sales order.",
+        "core_concepts": [
+            "order line items",
+            "purchased merchandise",
+            "sale quantities",
+            "item unit price",
+            "product discounts"
+        ],
+        "aliases": [
+            "line item",
+            "order details",
+            "purchase contents",
+            "basket items",
+            "sold products"
+        ],
+        "query_examples": [
+            "what products belong to an order",
+            "show quantity purchased for a specific item",
+            "find unit price of sold merchandise",
+            "list line items with discounts applied",
+            "what did the customer buy in this transaction",
+            "check purchase contents for an order",
+            "find order details for a SKU",
+            "how much discount was applied to this product",
+            "get basket items for a receipt",
+            "sold products in purchase history"
+        ],
+        "business_keywords": [
+            "item",
+            "line",
+            "quantity",
+            "price",
+            "discount",
+            "product",
+            "purchase"
+        ],
+        "business_concepts": [
+            "Sales Details",
+            "Merchandising Analytics",
+            "Order Fulfillment"
+        ],
+        "columns": [
+            {
+                "name": "ord_item_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for this specific row in the order",
+                "aliases": [
+                    "line id",
+                    "detail id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "ord_id",
+                "type": "INTEGER",
+                "description": "The parent purchase this line item belongs to",
+                "aliases": [
+                    "order id",
+                    "purchase id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "The specific merchandise item purchased",
+                "aliases": [
+                    "item id",
+                    "sku id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "qty",
+                "type": "INTEGER",
+                "description": "Number of units bought for this specific product",
+                "aliases": [
+                    "quantity",
+                    "units sold",
+                    "count"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "unit_price",
+                "type": "DECIMAL",
+                "description": "Selling price for a single unit of the merchandise at time of purchase",
+                "aliases": [
+                    "price",
+                    "selling price",
+                    "item cost"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "discount_amt",
+                "type": "DECIMAL",
+                "description": "Amount deducted from the standard price for this item",
+                "aliases": [
+                    "item discount",
+                    "savings",
+                    "reduction"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "ord_item_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "ord_id",
+                "references_table": "tbl_ord_hdr",
+                "references_column": "ord_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "product_id",
+                "references_table": "product",
+                "references_column": "product_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "tbl_ord_hdr",
+            "product",
+            "return_req"
+        ],
+        "importance": 9
+    },
+    {
+        "table": "pay_trn",
+        "category": "Payment Processing",
+        "summary": "Records financial transactions, capturing amounts paid, payment methods, and gateway statuses.",
+        "core_concepts": [
+            "payment transaction history",
+            "financial settlement",
+            "gateway response",
+            "checkout payment",
+            "money collected",
+            "payment method used"
+        ],
+        "aliases": [
+            "transaction",
+            "payment",
+            "charge",
+            "settlement",
+            "receipt"
+        ],
+        "query_examples": [
+            "payment transaction history",
+            "check if order was successfully charged",
+            "what payment method did the buyer use",
+            "find failed financial transactions",
+            "get the transaction reference for a purchase",
+            "how much money was collected for this order",
+            "show payments made via credit card",
+            "list recent checkout payments",
+            "when was the settlement processed",
+            "verify gateway response for a charge"
+        ],
+        "business_keywords": [
+            "payment",
+            "transaction",
+            "charge",
+            "method",
+            "status",
+            "amount",
+            "gateway"
+        ],
+        "business_concepts": [
+            "Finance",
+            "Payment Gateway",
+            "Revenue Collection",
+            "Checkout"
+        ],
+        "columns": [
+            {
+                "name": "payment_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the financial transaction",
+                "aliases": [
+                    "transaction id",
+                    "charge id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "ord_id",
+                "type": "INTEGER",
+                "description": "The sales order being paid for",
+                "aliases": [
+                    "order id",
+                    "purchase id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "payment_method",
+                "type": "VARCHAR",
+                "description": "Instrument used (e.g., Credit Card, PayPal, Wallet)",
+                "aliases": [
+                    "method",
+                    "card type",
+                    "payment type"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "payment_status",
+                "type": "VARCHAR",
+                "description": "State of the charge (e.g., Success, Failed, Pending)",
+                "aliases": [
+                    "transaction status",
+                    "charge state"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "txn_ref",
+                "type": "VARCHAR",
+                "description": "External reference code provided by the payment gateway",
+                "aliases": [
+                    "gateway reference",
+                    "bank ref",
+                    "authorization code"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "paid_amt",
+                "type": "DECIMAL",
+                "description": "Actual money collected in this transaction",
+                "aliases": [
+                    "amount paid",
+                    "charged amount",
+                    "settlement value"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "paid_on",
+                "type": "TIMESTAMP",
+                "description": "Date and time the charge was successfully processed",
+                "aliases": [
+                    "payment date",
+                    "charge time",
+                    "settlement date"
+                ],
+                "importance": 4
+            }
+        ],
+        "primary_keys": [
+            "payment_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "ord_id",
+                "references_table": "tbl_ord_hdr",
+                "references_column": "ord_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "tbl_ord_hdr",
+            "rfnd_log"
+        ],
+        "importance": 9
+    },
+    {
+        "table": "ship_hdr",
+        "category": "Logistics & Supply Chain",
+        "summary": "Tracks package delivery progress, courier assignments, and dispatch statuses.",
+        "core_concepts": [
+            "package delivery progress",
+            "shipment tracking",
+            "courier assignment",
+            "dispatch history",
+            "order fulfillment routing"
+        ],
+        "aliases": [
+            "shipment",
+            "delivery",
+            "dispatch",
+            "package",
+            "consignment",
+            "freight"
+        ],
+        "query_examples": [
+            "check package delivery status",
+            "get tracking number for my order",
+            "which carrier is delivering the shipment",
+            "when was the package dispatched",
+            "find shipments out for delivery",
+            "show fulfillment routing for purchase",
+            "track consignment progress",
+            "which warehouse dispatched this order",
+            "list delayed package deliveries",
+            "find courier assignment for order"
+        ],
+        "business_keywords": [
+            "shipment",
+            "tracking",
+            "carrier",
+            "delivery",
+            "dispatch",
+            "courier",
+            "package"
+        ],
+        "business_concepts": [
+            "Logistics",
+            "Fulfillment",
+            "Last Mile Delivery",
+            "Supply Chain"
+        ],
+        "columns": [
+            {
+                "name": "shipment_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the physical package dispatch",
+                "aliases": [
+                    "dispatch id",
+                    "package id",
+                    "consignment id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "ord_id",
+                "type": "INTEGER",
+                "description": "The customer purchase being fulfilled",
+                "aliases": [
+                    "order id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "warehouse_id",
+                "type": "INTEGER",
+                "description": "The fulfillment center where the package originated",
+                "aliases": [
+                    "origin facility",
+                    "dispatch warehouse"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "carrier",
+                "type": "VARCHAR",
+                "description": "Logistics company handling the transport (e.g., FedEx, UPS)",
+                "aliases": [
+                    "courier",
+                    "logistics provider",
+                    "shipping company"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "tracking_no",
+                "type": "VARCHAR",
+                "description": "Carrier's reference number used for external tracking",
+                "aliases": [
+                    "tracking number",
+                    "awb",
+                    "waybill"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "shipped_date",
+                "type": "TIMESTAMP",
+                "description": "Timestamp when the package left the warehouse",
+                "aliases": [
+                    "dispatch date",
+                    "ship date"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "delivery_status",
+                "type": "VARCHAR",
+                "description": "Current state of transport (e.g., In Transit, Delivered)",
+                "aliases": [
+                    "shipment state",
+                    "tracking status"
+                ],
+                "importance": 5
+            }
+        ],
+        "primary_keys": [
+            "shipment_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "ord_id",
+                "references_table": "tbl_ord_hdr",
+                "references_column": "ord_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "warehouse_id",
+                "references_table": "warehouse",
+                "references_column": "warehouse_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "tbl_ord_hdr",
+            "warehouse"
+        ],
+        "importance": 8
+    },
+    {
+        "table": "return_req",
+        "category": "Returns & Refunds",
+        "summary": "Captures customer requests to send back purchased items due to dissatisfaction or defects.",
+        "core_concepts": [
+            "customer return request",
+            "merchandise RMA",
+            "item send-back",
+            "post-purchase complaint",
+            "return authorization"
+        ],
+        "aliases": [
+            "return",
+            "rma",
+            "send back",
+            "return claim",
+            "reversal"
+        ],
+        "query_examples": [
+            "list customer return requests",
+            "why did the buyer send back this item",
+            "check status of merchandise RMA",
+            "find returns requested today",
+            "show rejected return claims",
+            "get post-purchase complaints for a product",
+            "find return authorization status",
+            "which order item is being reversed",
+            "reasons for item send-backs",
+            "pending returns waiting for approval"
+        ],
+        "business_keywords": [
+            "return",
+            "rma",
+            "reason",
+            "request",
+            "complaint",
+            "reversal"
+        ],
+        "business_concepts": [
+            "Reverse Logistics",
+            "Customer Service",
+            "Post-Purchase Experience"
+        ],
+        "columns": [
+            {
+                "name": "return_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the return merchandise authorization",
+                "aliases": [
+                    "rma id",
+                    "claim id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "ord_item_id",
+                "type": "INTEGER",
+                "description": "The specific product line item being sent back",
+                "aliases": [
+                    "line item id",
+                    "purchased item"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "reason",
+                "type": "VARCHAR",
+                "description": "Customer stated cause for the return (e.g., Defective, Wrong Size)",
+                "aliases": [
+                    "return reason",
+                    "cause",
+                    "complaint"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "request_date",
+                "type": "TIMESTAMP",
+                "description": "Date when the buyer initiated the claim",
+                "aliases": [
+                    "rma date",
+                    "claim date"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "return_status",
+                "type": "VARCHAR",
+                "description": "State of the request (e.g., Approved, Pending Inspection, Rejected)",
+                "aliases": [
+                    "rma status",
+                    "claim state"
+                ],
+                "importance": 5
+            }
+        ],
+        "primary_keys": [
+            "return_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "ord_item_id",
+                "references_table": "tbl_ord_item",
+                "references_column": "ord_item_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "tbl_ord_item",
+            "rfnd_log"
+        ],
+        "importance": 7
+    },
+    {
+        "table": "rfnd_log",
+        "category": "Returns & Refunds, return and refund log",
+        "summary": "Tracks money credited back to customers after returns, cancellations, or disputes.",
+        "core_concepts": [
+            "money refund after delivery",
+            "credited amount",
+            "payment reversal",
+            "dispute resolution cash back",
+            "purchase history",
+            "financial return processing"
+        ],
+        "aliases": [
+            "refund",
+            "credit",
+            "reversal",
+            "cash back",
+            "refund transaction"
+        ],
+        "query_examples": [
+            "check refund after delivery",
+            "how much money was credited back to the customer",
+            "find successful payment reversals",
+            "status of dispute resolution cash back",
+            "list failed refund processing records",
+            "when was the money returned to the buyer",
+            "find refund transaction for a return request",
+            "get credited amount for cancelled order",
+            "link payment to financial return",
+            "show pending refund logs"
+        ],
+        "business_keywords": [
+            "refund",
+            "credit",
+            "reversal",
+            "money",
+            "processed",
+            "amount"
+        ],
+        "business_concepts": [
+            "Finance",
+            "Customer Resolution",
+            "Payment Gateway"
+        ],
+        "columns": [
+            {
+                "name": "refund_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the financial reversal transaction",
+                "aliases": [
+                    "credit id",
+                    "reversal id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "return_id",
+                "type": "INTEGER",
+                "description": "The approved return claim triggering this credit",
+                "aliases": [
+                    "rma id",
+                    "claim id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "payment_id",
+                "type": "INTEGER",
+                "description": "The original financial charge being reversed",
+                "aliases": [
+                    "original transaction id",
+                    "charge id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "refund_amt",
+                "type": "DECIMAL",
+                "description": "Amount of money being returned to the shopper",
+                "aliases": [
+                    "credit amount",
+                    "cash back value"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "refund_status",
+                "type": "VARCHAR",
+                "description": "Gateway status of the credit (e.g., Initiated, Completed)",
+                "aliases": [
+                    "credit state",
+                    "reversal status"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "processed_on",
+                "type": "TIMESTAMP",
+                "description": "Timestamp when the money was successfully returned",
+                "aliases": [
+                    "refund date",
+                    "credit time"
+                ],
+                "importance": 4
+            }
+        ],
+        "primary_keys": [
+            "refund_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "return_id",
+                "references_table": "return_req",
+                "references_column": "return_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "payment_id",
+                "references_table": "pay_trn",
+                "references_column": "payment_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "return_req",
+            "pay_trn"
+        ],
+        "importance": 7
+    },
+    {
+        "table": "coupon",
+        "category": "Promotions",
+        "summary": "Stores discount codes, promotional vouchers, and campaign rules applied at checkout.",
+        "core_concepts": [
+            "discount code",
+            "promotional voucher",
+            "checkout coupon",
+            "marketing campaign offer",
+            "price reduction rules"
+        ],
+        "aliases": [
+            "promo code",
+            "voucher",
+            "discount",
+            "offer",
+            "deal"
+        ],
+        "query_examples": [
+            "list available promotional vouchers",
+            "check discount code validity",
+            "find expired marketing campaign offers",
+            "what is the discount value of this promo code",
+            "show coupons active this month",
+            "find deals with percentage discount",
+            "get price reduction rules for a voucher",
+            "is this checkout coupon still valid",
+            "search offers by promo code name",
+            "find fixed amount discount codes"
+        ],
+        "business_keywords": [
+            "coupon",
+            "promo",
+            "discount",
+            "voucher",
+            "code",
+            "validity",
+            "offer"
+        ],
+        "business_concepts": [
+            "Marketing",
+            "Promotions",
+            "Pricing Strategy"
+        ],
+        "columns": [
+            {
+                "name": "coupon_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the promotional rule",
+                "aliases": [
+                    "promo id",
+                    "offer id",
+                    "voucher id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "coupon_code",
+                "type": "VARCHAR",
+                "description": "The actual string entered by the user at checkout (e.g., SAVE20)",
+                "aliases": [
+                    "promo code",
+                    "discount code"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "discount_type",
+                "type": "VARCHAR",
+                "description": "Format of the reduction (e.g., Percentage, Fixed Amount)",
+                "aliases": [
+                    "offer type",
+                    "reduction format"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "discount_value",
+                "type": "DECIMAL",
+                "description": "The amount or percentage taken off the order total",
+                "aliases": [
+                    "savings amount",
+                    "promo value"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "valid_from",
+                "type": "TIMESTAMP",
+                "description": "Start date when the code becomes usable",
+                "aliases": [
+                    "start date",
+                    "active from"
+                ],
+                "importance": 3
+            },
+            {
+                "name": "valid_to",
+                "type": "TIMESTAMP",
+                "description": "Expiration date after which the code is invalid",
+                "aliases": [
+                    "expiry date",
+                    "end date"
+                ],
+                "importance": 4
+            }
+        ],
+        "primary_keys": [
+            "coupon_id"
+        ],
+        "foreign_keys": [],
+        "connected_tables": [
+            "tbl_ord_hdr"
+        ],
+        "importance": 6
+    },
+    {
+        "table": "review",
+        "category": "Customer Feedback",
+        "summary": "Contains ratings, opinions, and written feedback provided by shoppers for products.",
+        "core_concepts": [
+            "customer product reviews",
+            "shopper feedback",
+            "item ratings",
+            "user opinions",
+            "merchandise testimonials"
+        ],
+        "aliases": [
+            "rating",
+            "feedback",
+            "opinion",
+            "comment",
+            "testimonial"
+        ],
+        "query_examples": [
+            "find customer product reviews for a SKU",
+            "show merchandise with 5 star item ratings",
+            "get shopper feedback text",
+            "who wrote this opinion on the item",
+            "list recent testimonials for shoes",
+            "find low rated products",
+            "search user comments for defects",
+            "when was this merchandise reviewed",
+            "aggregate item ratings by category",
+            "check opinions from a specific buyer"
+        ],
+        "business_keywords": [
+            "review",
+            "rating",
+            "feedback",
+            "opinion",
+            "comment",
+            "stars"
+        ],
+        "business_concepts": [
+            "User Generated Content",
+            "Product Quality",
+            "Customer Sentiment"
+        ],
+        "columns": [
+            {
+                "name": "review_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the feedback entry",
+                "aliases": [
+                    "feedback id",
+                    "comment id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "The merchandise being evaluated",
+                "aliases": [
+                    "item id",
+                    "sku id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "The shopper who wrote the feedback",
+                "aliases": [
+                    "reviewer id",
+                    "user id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "rating",
+                "type": "INTEGER",
+                "description": "Numerical score given to the item (e.g., 1 to 5 stars)",
+                "aliases": [
+                    "stars",
+                    "score"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "review_text",
+                "type": "VARCHAR",
+                "description": "Written narrative or detailed opinion of the product",
+                "aliases": [
+                    "comment",
+                    "feedback text",
+                    "description"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "reviewed_on",
+                "type": "TIMESTAMP",
+                "description": "Date when the feedback was submitted",
+                "aliases": [
+                    "review date",
+                    "submission date"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "review_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "product_id",
+                "references_table": "product",
+                "references_column": "product_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "customer_id",
+                "references_table": "customer",
+                "references_column": "customer_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "product",
+            "customer"
+        ],
+        "importance": 7
+    },
+    {
+        "table": "cart_item",
+        "category": "Shopping Cart",
+        "summary": "Holds items temporarily selected by users for purchase but not yet checked out.",
+        "core_concepts": [
+            "products added to cart",
+            "shopping basket items",
+            "pre-checkout selections",
+            "abandoned cart contents",
+            "pending purchases"
+        ],
+        "aliases": [
+            "cart",
+            "basket",
+            "bag",
+            "pending item",
+            "unpurchased goods"
+        ],
+        "query_examples": [
+            "show products added to a user's cart",
+            "list shopping basket items for a customer",
+            "find abandoned cart contents",
+            "what is in the shopper's bag right now",
+            "check pre-checkout selections",
+            "when was this item added to the basket",
+            "find pending purchases waiting for checkout",
+            "how many units of SKU are in the cart",
+            "clear shopping cart for user",
+            "get total items currently in basket"
+        ],
+        "business_keywords": [
+            "cart",
+            "basket",
+            "bag",
+            "pending",
+            "abandoned",
+            "checkout"
+        ],
+        "business_concepts": [
+            "Conversion Funnel",
+            "Shopping Cart",
+            "Customer Intent"
+        ],
+        "columns": [
+            {
+                "name": "cart_item_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the row in the shopping basket",
+                "aliases": [
+                    "basket item id",
+                    "selection id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "The user owning this shopping cart",
+                "aliases": [
+                    "buyer id",
+                    "shopper id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "The merchandise placed in the bag",
+                "aliases": [
+                    "item id",
+                    "sku id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "qty",
+                "type": "INTEGER",
+                "description": "Number of units intended for purchase",
+                "aliases": [
+                    "quantity",
+                    "count"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "added_at",
+                "type": "TIMESTAMP",
+                "description": "Timestamp when the merchandise was put in the basket",
+                "aliases": [
+                    "selection time",
+                    "bagged on"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "cart_item_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "customer_id",
+                "references_table": "customer",
+                "references_column": "customer_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "product_id",
+                "references_table": "product",
+                "references_column": "product_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "customer",
+            "product"
+        ],
+        "importance": 6
+    },
+    {
+        "table": "wishlist_item",
+        "category": "Customer Intent",
+        "summary": "Tracks merchandise saved by customers for potential future purchase consideration.",
+        "core_concepts": [
+            "products added to wishlist",
+            "saved for later items",
+            "favorited merchandise",
+            "future purchase intent",
+            "bookmarked catalog items"
+        ],
+        "aliases": [
+            "wishlist",
+            "favorites",
+            "saved items",
+            "bookmarks",
+            "likes"
+        ],
+        "query_examples": [
+            "show products added to wishlist",
+            "find items saved for later by a user",
+            "list favorited merchandise",
+            "check future purchase intent for SKU",
+            "what has the buyer bookmarked",
+            "when did the customer favorite this product",
+            "find most wishlisted items",
+            "get saved items for account holder",
+            "remove item from favorites",
+            "check if merchandise is in a wishlist"
+        ],
+        "business_keywords": [
+            "wishlist",
+            "favorite",
+            "saved",
+            "bookmark",
+            "intent",
+            "likes"
+        ],
+        "business_concepts": [
+            "Customer Interest",
+            "Product Popularity",
+            "Lead Generation"
+        ],
+        "columns": [
+            {
+                "name": "wishlist_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the saved favorite entry",
+                "aliases": [
+                    "favorite id",
+                    "bookmark id"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "The user who saved the item",
+                "aliases": [
+                    "shopper id",
+                    "buyer id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "The specific merchandise favorited",
+                "aliases": [
+                    "item id",
+                    "sku id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "created_at",
+                "type": "TIMESTAMP",
+                "description": "Date and time the item was added to favorites",
+                "aliases": [
+                    "saved on",
+                    "favorited date"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "wishlist_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "customer_id",
+                "references_table": "customer",
+                "references_column": "customer_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "product_id",
+                "references_table": "product",
+                "references_column": "product_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "customer",
+            "product"
+        ],
+        "importance": 5
+    },
+    {
+        "table": "recently_viewed",
+        "category": "Browsing History",
+        "summary": "Logs the catalog items shoppers click on and look at, building a browsing trail.",
+        "core_concepts": [
+            "browsing history",
+            "recently viewed products",
+            "shopper click trail",
+            "catalog viewing log",
+            "user item impressions"
+        ],
+        "aliases": [
+            "view history",
+            "browsing trail",
+            "clicks",
+            "impressions",
+            "visited pages"
+        ],
+        "query_examples": [
+            "show recently viewed products for a buyer",
+            "find a user's catalog browsing history",
+            "what items did the shopper click on today",
+            "get catalog viewing log",
+            "track user item impressions",
+            "when was this merchandise last looked at",
+            "most viewed items in the last hour",
+            "check click trail for account holder",
+            "list visited product pages",
+            "revisit history for customer"
+        ],
+        "business_keywords": [
+            "viewed",
+            "history",
+            "browsing",
+            "clicks",
+            "trail",
+            "visited",
+            "impressions"
+        ],
+        "business_concepts": [
+            "Web Analytics",
+            "User Engagement",
+            "Clickstream"
+        ],
+        "columns": [
+            {
+                "name": "view_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the page view event",
+                "aliases": [
+                    "click id",
+                    "impression id"
+                ],
+                "importance": 3
+            },
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "The user who looked at the item",
+                "aliases": [
+                    "visitor id",
+                    "shopper id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "The merchandise page visited",
+                "aliases": [
+                    "item id",
+                    "sku id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "viewed_at",
+                "type": "TIMESTAMP",
+                "description": "Exact timestamp of the catalog click",
+                "aliases": [
+                    "clicked on",
+                    "visit time"
+                ],
+                "importance": 4
+            }
+        ],
+        "primary_keys": [
+            "view_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "customer_id",
+                "references_table": "customer",
+                "references_column": "customer_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "product_id",
+                "references_table": "product",
+                "references_column": "product_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "customer",
+            "product"
+        ],
+        "importance": 4
+    },
+    {
+        "table": "recommendation_log",
+        "category": "Machine Learning",
+        "summary": "Records personalized merchandise suggestions generated by algorithms for specific users.",
+        "core_concepts": [
+            "algorithmic product recommendations",
+            "personalized suggestions",
+            "machine learning cross-sells",
+            "user targeted items",
+            "AI generated offers"
+        ],
+        "aliases": [
+            "recommendations",
+            "suggestions",
+            "cross sells",
+            "upsells",
+            "picks for you"
+        ],
+        "query_examples": [
+            "find algorithmic product recommendations for user",
+            "what items were suggested to the buyer",
+            "list machine learning cross-sells",
+            "check AI generated offers",
+            "get personalized picks for a shopper",
+            "which algorithm suggested this merchandise",
+            "what is the recommendation score for this item",
+            "find user targeted items generated today",
+            "track success of recommendation engine",
+            "show upsells presented to customer"
+        ],
+        "business_keywords": [
+            "recommendation",
+            "suggestion",
+            "algorithm",
+            "ai",
+            "score",
+            "cross_sell",
+            "upsell"
+        ],
+        "business_concepts": [
+            "Personalization",
+            "Data Science",
+            "Targeted Marketing",
+            "Cross-selling"
+        ],
+        "columns": [
+            {
+                "name": "rec_id",
+                "type": "INTEGER",
+                "description": "Unique identifier for the generated suggestion event",
+                "aliases": [
+                    "suggestion id",
+                    "log id"
+                ],
+                "importance": 3
+            },
+            {
+                "name": "customer_id",
+                "type": "INTEGER",
+                "description": "The user targeted by the personalization engine",
+                "aliases": [
+                    "target user",
+                    "shopper id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "product_id",
+                "type": "INTEGER",
+                "description": "The specific merchandise suggested to the user",
+                "aliases": [
+                    "suggested item",
+                    "sku id"
+                ],
+                "importance": 5
+            },
+            {
+                "name": "algo_name",
+                "type": "VARCHAR",
+                "description": "Name of the machine learning model that generated the pick",
+                "aliases": [
+                    "model name",
+                    "engine version"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "score",
+                "type": "DECIMAL",
+                "description": "Confidence or affinity metric calculated by the algorithm",
+                "aliases": [
+                    "confidence score",
+                    "affinity",
+                    "relevance"
+                ],
+                "importance": 4
+            },
+            {
+                "name": "generated_at",
+                "type": "TIMESTAMP",
+                "description": "Timestamp when the suggestion was calculated",
+                "aliases": [
+                    "creation time",
+                    "logged on"
+                ],
+                "importance": 3
+            }
+        ],
+        "primary_keys": [
+            "rec_id"
+        ],
+        "foreign_keys": [
+            {
+                "column": "customer_id",
+                "references_table": "customer",
+                "references_column": "customer_id",
+                "relationship": "many_to_one"
+            },
+            {
+                "column": "product_id",
+                "references_table": "product",
+                "references_column": "product_id",
+                "relationship": "many_to_one"
+            }
+        ],
+        "connected_tables": [
+            "customer",
+            "product"
+        ],
+        "importance": 4
+    }
+]
