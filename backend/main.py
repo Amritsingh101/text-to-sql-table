@@ -8,7 +8,7 @@ import startup
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s – %(message)s",
+    format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
 )
 logger = logging.getLogger(__name__)
 
@@ -47,7 +47,7 @@ if _FRONTEND_DIR.exists():
 
 class QueryRequest(BaseModel):
     query: str
-    top_k: int = 7
+    top_k: int = 8
 
 
 class SearchResponse(BaseModel):
@@ -63,7 +63,6 @@ def root():
 def search_tables(request: QueryRequest):
    
     from search.reranker import rerank
-
     if not request.query.strip():
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
     

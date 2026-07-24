@@ -12,7 +12,7 @@ with open(_DATA_DIR / "documents.pkl", "rb") as f:
     documents = pickle.load(f)
 
 
-def rerank(query: str, top_k: int = 7) -> list[dict]:
+def rerank(query: str, top_k: int = 8) -> list[dict]:
     """
     Hybrid search (BM25 + embedding) followed by cross-encoder reranking.
     Returns a list of dicts with table name and score, best first.

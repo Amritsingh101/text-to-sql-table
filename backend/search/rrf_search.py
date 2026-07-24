@@ -27,7 +27,7 @@ def reciprocal_rank_fusion(
     return ranked
 
 
-def hybrid_search(query, embedding_weight=0.8, bm25_weight=0.2, top_k=7):
+def hybrid_search(query, embedding_weight=0.8, bm25_weight=0.2, top_k=8):
     bm25_results = bm25_search(query, top_k=15)
     embedding_results = embedding_search(query, top_k=15)
     fused = reciprocal_rank_fusion(
