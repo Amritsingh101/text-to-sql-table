@@ -4,8 +4,10 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-_DATA_BASE = Path(__file__).parent.parent          
-_SCHEMA_PATH = _DATA_BASE / "schema" / "schema.json"
+_SCHEMA_PATH = Path(__file__).parent / "schema" / "schema.json"
+if not _SCHEMA_PATH.exists():
+    _SCHEMA_PATH = Path(__file__).parent.parent / "schema" / "schema.json"
+
 _DATA_DIR = Path(__file__).parent / "data"   
 
 _METADATA_FILES = [

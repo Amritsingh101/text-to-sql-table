@@ -11,6 +11,7 @@ An end-to-end AI-powered schema retrieval system and interactive web application
 - **Offline Model Support**: Downloads ML models once on initial setup and caches them locally under `backend/data/models/` for full offline execution.
 - **FastAPI Backend**: Asynchronous Python backend with automatic lifespan initialization and schema hash tracking.
 - **Modern React + Vite Frontend**: Fast, responsive dark-mode UI with query input, Top-K controls, preset query pills, and one-click table name copy.
+- **Interactive Development & Evaluation**: Includes `testing/pipeline.ipynb` for debugging/experimentation and `testing/queries.py` for query benchmark evaluation.
 
 ---
 
@@ -45,7 +46,7 @@ An end-to-end AI-powered schema retrieval system and interactive web application
 ## 📁 Repository Structure
 
 ```
-text-sql/
+text-sql-table-name/
 ├── README.md                      # Unified project documentation
 ├── schema/                        # Database schema definition
 │   └── schema.json                # Primary database schema input
@@ -72,19 +73,24 @@ text-sql/
 │       ├── rrf_search.py
 │       └── reranker.py
 │
-└── frontend/                      # React + Vite Frontend
-    ├── index.html                 # Main HTML entry point
-    ├── vite.config.js             # Vite configuration
-    ├── package.json               # Node.js dependencies
-    └── src/
-        ├── main.jsx               # React entry point
-        ├── App.jsx                # Main app layout & state management
-        ├── index.css              # Glassmorphic dark mode styling
-        └── components/
-            ├── Header.jsx         # Live backend status indicator & branding
-            ├── SearchCard.jsx     # Query input, Top K selector & sample pills
-            ├── TableCard.jsx      # Ranked table card display with copy button
-            └── ResultsSection.jsx # Results grid & state handling
+├── frontend/                      # React + Vite Frontend
+│   ├── index.html                 # Main HTML entry point
+│   ├── vite.config.js             # Vite configuration
+│   ├── package.json               # Node.js dependencies
+│   └── src/
+│       ├── main.jsx               # React entry point
+│       ├── App.jsx                # Main app layout & state management
+│       ├── index.css              # Glassmorphic dark mode styling
+│       └── components/
+│           ├── Header.jsx         # Live backend status indicator & branding
+│           ├── SearchCard.jsx     # Query input, Top K selector & sample pills
+│           ├── TableCard.jsx      # Ranked table card display with copy button
+│           └── ResultsSection.jsx # Results grid & state handling
+│
+└── testing/                       # Development & Evaluation Suite
+    ├── pipeline.ipynb             # Jupyter Notebook for pipeline debugging & experimentation
+    ├── queries.py                 # Evaluation script for testing query benchmark suites
+    └── schema.json                # Test schema definitions
 ```
 
 ---
@@ -151,6 +157,24 @@ text-sql/
 
 ---
 
+## 🧪 Development, Testing & Experimentation
+
+The `testing/` directory contains tools for prototyping, debugging, and evaluating the retrieval pipeline:
+
+### 1. `testing/pipeline.ipynb` (Jupyter Notebook)
+An interactive notebook used for step-by-step development, visualization, and debugging of the retrieval pipeline (BM25, embeddings, FAISS indexing, and Cross-Encoder predictions).
+
+> **Prerequisite for `pipeline.ipynb`:**
+> Before executing cells in `pipeline.ipynb`, ensure there is a `data/` folder created in the root directory (`d:\text-sql-table-name\data`), as the notebook reads/writes temporary test indices to `data/`.
+> ```bash
+> mkdir data
+> ```
+
+### 2. `testing/queries.py` (Evaluation Script)
+A test script containing benchmark queries to evaluate and compare table retrieval accuracy across different algorithms.
+
+---
+
 ## 📡 API Reference
 
 ### Health Check
@@ -195,4 +219,5 @@ text-sql/
 | **Lexical Retrieval** | Rank-BM25 |
 | **Vector Retrieval** | FAISS (`faiss-cpu`), SentenceTransformers (`BAAI/bge-base-en-v1.5`) |
 | **Reranking** | CrossEncoder (`cross-encoder/ms-marco-MiniLM-L6-v2`) |
+| **Testing & Dev** | Jupyter Notebook (`pipeline.ipynb`), Python (`queries.py`) |
 | **Persistence** | Pickle, NumPy, FAISS Index |

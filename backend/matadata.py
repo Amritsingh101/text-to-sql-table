@@ -4,8 +4,11 @@ import pickle
 from pathlib import Path
 
 # Resolve paths relative to this file so CWD doesn't matter
-_BASE = Path(__file__).parent.parent  # text-sql/
-_SCHEMA_PATH = _BASE / "schema" / "schema.json"
+# Resolve schema path (checks backend/schema/schema.json first, then root schema/schema.json)
+_SCHEMA_PATH = Path(__file__).parent / "schema" / "schema.json"
+if not _SCHEMA_PATH.exists():
+    _SCHEMA_PATH = Path(__file__).parent.parent / "schema" / "schema.json"
+
 _DATA_DIR = Path(__file__).parent / "data"  # text-sql/backend/data/
 
 with open(_SCHEMA_PATH, "r", encoding="utf-8") as f:
