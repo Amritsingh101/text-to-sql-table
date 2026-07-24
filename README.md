@@ -170,7 +170,7 @@ An interactive notebook used for step-by-step development, visualization, and de
 > mkdir data
 > ```
 
-### 2. `testing/queries.py` (Evaluation Script)
+### 2. `testing/queries.py` (Evaluation Script contains approx 150 queries)
 A test script containing benchmark queries to evaluate and compare table retrieval accuracy across different algorithms.
 
 ---

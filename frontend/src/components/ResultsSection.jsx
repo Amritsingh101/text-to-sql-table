@@ -34,7 +34,7 @@ export default function ResultsSection({ activeQuery, results, isLoading, error 
             <TableCard
               key={index}
               rank={index + 1}
-              table={item.table}
+              table={typeof item === 'string' ? item : item.table}
             />
           ))}
         </div>

@@ -4,17 +4,16 @@ import { Search, X, ArrowRight, Loader2 } from 'lucide-react';
 const SAMPLE_QUERIES = [
   { label: 'find user details named "anshul"', query: 'find the user details named "anshul".' },
   { label: 'customer transactions & history', query: 'show customer transaction and order history' },
-  { label: 'employee salary & department', query: 'get employee salary and department details' },
   { label: 'product stock & categories', query: 'list product categories and current stock levels' }
 ];
 
-export default function SearchCard({ 
-  query, 
-  setQuery, 
-  topK, 
-  setTopK, 
-  onSearch, 
-  isLoading 
+export default function SearchCard({
+  query,
+  setQuery,
+  topK,
+  setTopK,
+  onSearch,
+  isLoading
 }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,9 +43,9 @@ export default function SearchCard({
               required
             />
             {query && (
-              <button 
-                type="button" 
-                className="clear-btn" 
+              <button
+                type="button"
+                className="clear-btn"
                 onClick={() => setQuery('')}
                 title="Clear input"
               >

@@ -50,14 +50,8 @@ class QueryRequest(BaseModel):
     top_k: int = 7
 
 
-class TableResult(BaseModel):
-    table: str
-    score: float
-
-
 class SearchResponse(BaseModel):
-    query: str
-    tables: list[TableResult]
+    tables: list[str]
 
 
 @app.get("/")
@@ -72,9 +66,9 @@ def search_tables(request: QueryRequest):
 
     if not request.query.strip():
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
-
+    
     results = rerank(request.query, top_k=request.top_k)
+    print(results)
     return SearchResponse(
-        query=request.query,
-        tables=[TableResult(**r) for r in results]
+        tables=[r["table"] for r in results]
     )
