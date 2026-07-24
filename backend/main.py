@@ -68,7 +68,6 @@ def search_tables(request: QueryRequest):
         raise HTTPException(status_code=400, detail="Query cannot be empty.")
     
     results = rerank(request.query, top_k=request.top_k)
-    print(results)
     return SearchResponse(
         tables=[r["table"] for r in results]
     )
